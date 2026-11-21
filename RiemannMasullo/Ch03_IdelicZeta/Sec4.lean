@@ -333,7 +333,11 @@ by zero, addition and complex scalar multiplication. -/
 theorem schwartzBruhatEigen_submodule (c : QuasiCharacter Rˣ) :
     isEigen(c, (0 : StrongDual ℂ ℬ(R))) ∧
       (∀ T U : StrongDual ℂ ℬ(R), isEigen(c, T) → isEigen(c, U) → isEigen(c, T + U)) ∧
-      (∀ (a : ℂ) (T : StrongDual ℂ ℬ(R)), isEigen(c, T) → isEigen(c, a • T)) := by sorry
+      (∀ (a : ℂ) (T : StrongDual ℂ ℬ(R)), isEigen(c, T) → isEigen(c, a • T)) := by
+  refine ⟨fun g f ↦ by simp, fun T U hT hU g f ↦ ?_, fun a T hT g f ↦ ?_⟩
+  · simp only [ContinuousLinearMap.add_apply, hT g f, hU g f, mul_add]
+  · simp only [ContinuousLinearMap.smul_apply, hT g f, smul_eq_mul]
+    ring
 
 -- TODO(paper-gap): The right-translation gloss in Definition 3.4.3.1 reverses
 -- the action of (2.1.2.2) and the weight condition recalled in Definition 5.5.1.1.
